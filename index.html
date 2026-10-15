@@ -2,24 +2,32 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#ffffff">
-  <meta name="description" content="Jesse Stephen's engineering portfolio featuring accessible design, electronics, CAD, embedded systems, and technical problem-solving.">
-  <title>Jesse Stephen — Engineering Portfolio</title>
+
+  <meta name="description"
+        content="Jesse Stephen's engineering portfolio featuring embedded systems, physical computing, assistive technology, CAD, and technical support.">
+
+  <title>Jesse Stephen | Engineering Portfolio</title>
 
   <style>
     :root {
-      --red: #b42332;
-      --red-dark: #891b27;
-      --ink: #191919;
-      --muted: #666;
-      --line: #e7e4e2;
-      --paper: #fff;
-      --soft: #f8f7f6;
-      --max: 1080px;
+      --red: #c62828;
+      --red-dark: #a51f25;
+      --red-light: #fff1f1;
+      --ink: #171717;
+      --muted: #656565;
+      --line: #e7e7e7;
+      --surface: #f7f7f7;
+      --white: #ffffff;
+      --max-width: 1120px;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     html {
       scroll-behavior: smooth;
@@ -27,300 +35,1574 @@
     }
 
     body {
-      margin: 0;
-      background: var(--paper);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                   Helvetica, Arial, sans-serif;
+      background: var(--white);
       color: var(--ink);
-      font: 16px/1.75 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.7;
       -webkit-font-smoothing: antialiased;
     }
 
-    a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; }
-
-    a:focus-visible {
-      outline: 2px solid var(--red);
-      outline-offset: 4px;
+    a {
+      color: inherit;
+      text-decoration: none;
     }
 
-    .wrap { width: min(var(--max), 88%); margin: auto; }
-    .red { color: var(--red); }
-    .muted { color: var(--muted); }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: rgba(255,255,255,.96);
-      border-bottom: 1px solid var(--line);
-      backdrop-filter: blur(10px);
+    img {
+      display: block;
+      width: 100%;
     }
 
-    .nav {
-      min-height: 72px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
+    button, a {
+      -webkit-tap-highlight-color: transparent;
     }
 
-    .brand {
-      font-size: 17px;
-      font-weight: 800;
-      letter-spacing: -.7px;
+    .container {
+      width: min(var(--max-width), calc(100% - 48px));
+      margin: 0 auto;
     }
-
-    .brand span { color: var(--red); }
-
-    .links {
-      display: flex;
-      gap: 22px;
-      flex-wrap: wrap;
-      font-size: 13px;
-    }
-
-    .links a:hover { color: var(--red); }
-
-    .hero { padding: 105px 0 95px; }
 
     .eyebrow {
       color: var(--red);
-      font-size: 11px;
-      letter-spacing: 2px;
+      font-size: 0.78rem;
       font-weight: 800;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
+      margin-bottom: 12px;
     }
 
-    h1 {
-      font-size: clamp(43px, 7vw, 76px);
-      line-height: 1.08;
-      letter-spacing: -4px;
-      max-width: 850px;
-      margin: 24px 0;
-      font-weight: 750;
+    h1, h2, h3, h4 {
+      line-height: 1.2;
+      letter-spacing: -0.035em;
     }
 
     h2 {
-      font-size: clamp(29px, 4vw, 42px);
-      line-height: 1.2;
-      letter-spacing: -1.5px;
-      margin: 12px 0 18px;
-    }
-
-    h3 {
-      font-size: 20px;
-      line-height: 1.35;
-      margin: 10px 0;
-    }
-
-    p { margin: 12px 0; }
-
-    .intro {
-      max-width: 670px;
-      color: var(--muted);
-      font-size: 18px;
-    }
-
-    .buttons, .contact-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 28px;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 11px 17px;
-      border: 1px solid var(--ink);
-      border-radius: 4px;
-      font-size: 13px;
-      font-weight: 700;
-      transition: .2s;
-    }
-
-    .btn.primary {
-      color: white;
-      background: var(--red);
-      border-color: var(--red);
-    }
-
-    .btn:hover { transform: translateY(-2px); }
-    .btn.primary:hover { background: var(--red-dark); }
-
-    section {
-      padding: 75px 0;
-      border-top: 1px solid var(--line);
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 16px;
     }
 
     .section-intro {
       max-width: 660px;
       color: var(--muted);
-      margin-bottom: 32px;
+      font-size: 1.02rem;
+      margin-bottom: 38px;
     }
 
-    .number {
-      color: var(--red);
-      font-weight: 800;
-      margin-right: 8px;
+    section {
+      padding: 100px 0;
     }
 
-    .about-grid, .project-grid, .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 24px;
+    .section-heading {
+      margin-bottom: 42px;
     }
 
-    .about-copy { max-width: 650px; }
-
-    .side-note {
-      background: var(--soft);
-      border-left: 3px solid var(--red);
-      padding: 22px;
-      align-self: start;
-    }
-
-    .project {
-      border: 1px solid var(--line);
-      border-radius: 7px;
-      overflow: hidden;
-      min-width: 0;
-    }
-
-    .project-body { padding: 24px; }
-
-    .project p {
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .project-label {
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 1.4px;
-      text-transform: uppercase;
-      color: var(--red);
-    }
-
-    .photo-gallery {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 8px;
-      padding: 10px;
-      background: var(--soft);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .photo-gallery .photo {
-      width: 100%;
-      height: 100%;
-      min-height: 130px;
-      aspect-ratio: 4 / 3;
-      object-fit: contain;
-      display: block;
-      background: #f1efed;
+    .accent-line {
+      width: 54px;
+      height: 4px;
+      background: var(--red);
+      margin-top: 20px;
       border-radius: 4px;
     }
 
-    .photo-gallery .photo:first-child {
-      grid-column: 1 / -1;
-      aspect-ratio: 16 / 9;
+    /* Navigation */
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
     }
 
-    .photo-caption {
-      grid-column: 1 / -1;
-      margin: 0;
+    .nav-inner {
+      min-height: 76px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .brand {
+      font-size: 1.12rem;
+      font-weight: 850;
+      letter-spacing: -0.04em;
+      white-space: nowrap;
+    }
+
+    .brand span {
+      color: var(--red);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 27px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.86rem;
+      font-weight: 650;
+      color: #4b4b4b;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--red);
+    }
+
+    .nav-contact {
+      border: 1px solid var(--red);
+      padding: 9px 15px;
+      border-radius: 6px;
+      color: var(--red) !important;
+    }
+
+    .nav-contact:hover {
+      background: var(--red);
+      color: white !important;
+    }
+
+    /* Hero */
+
+    .hero {
+      padding: 112px 0 105px;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 0.65fr;
+      align-items: center;
+      gap: 70px;
+    }
+
+    .hero h1 {
+      max-width: 760px;
+      font-size: clamp(3rem, 7.2vw, 5.8rem);
+      font-weight: 850;
+      line-height: 1.02;
+      margin-bottom: 26px;
+    }
+
+    .hero h1 span {
+      color: var(--red);
+    }
+
+    .hero-description {
+      max-width: 660px;
+      font-size: 1.1rem;
+      color: #575757;
+      margin-bottom: 32px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 13px;
+    }
+
+    .button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      min-height: 47px;
+      padding: 12px 20px;
+      border: 1px solid var(--red);
+      border-radius: 6px;
+      font-size: 0.92rem;
+      font-weight: 750;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button-primary {
+      background: var(--red);
+      color: white;
+    }
+
+    .button-primary:hover {
+      background: var(--red-dark);
+    }
+
+    .button-secondary {
+      background: white;
+      color: var(--red);
+    }
+
+    .button-secondary:hover {
+      background: var(--red-light);
+    }
+
+    .hero-panel {
+      position: relative;
+      padding: 31px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+    }
+
+    .hero-panel::before {
+      content: "";
+      position: absolute;
+      top: -9px;
+      left: 24px;
+      width: 48px;
+      height: 4px;
+      background: var(--red);
+      border-radius: 4px;
+    }
+
+    .hero-panel-label {
+      color: var(--red);
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .focus-item {
+      padding: 17px 0;
+      border-bottom: 1px solid #e1e1e1;
+    }
+
+    .focus-item:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .focus-item strong {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+
+    .focus-item p {
+      font-size: 0.88rem;
       color: var(--muted);
-      font-size: 11px;
+      line-height: 1.55;
+    }
+
+    /* About */
+
+    .about {
+      background: var(--surface);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .about-label {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--red);
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .about-copy p {
+      color: #555;
+      margin-bottom: 18px;
+      font-size: 1.02rem;
+    }
+
+    .about-copy p:last-child {
+      margin-bottom: 0;
+    }
+
+    .principles {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .principle {
+      padding: 18px;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .principle strong {
+      display: block;
+      font-size: 0.92rem;
+      margin-bottom: 5px;
+    }
+
+    .principle span {
+      color: var(--muted);
+      font-size: 0.82rem;
       line-height: 1.5;
     }
 
-    .tags {
+    /* Projects */
+
+    .project {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 38px;
+      background: white;
+    }
+
+    .project:last-child {
+      margin-bottom: 0;
+    }
+
+    .project-header {
+      padding: 35px 38px 28px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .project-number {
+      display: inline-block;
+      color: var(--red);
+      font-size: 0.78rem;
+      font-weight: 850;
+      letter-spacing: 0.13em;
+      margin-bottom: 12px;
+    }
+
+    .project-header h3 {
+      font-size: clamp(1.6rem, 3vw, 2.3rem);
+      margin-bottom: 14px;
+    }
+
+    .project-summary {
+      max-width: 850px;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .tag-list {
       display: flex;
       flex-wrap: wrap;
-      gap: 7px;
-      margin-top: 18px;
+      gap: 8px;
+      list-style: none;
+      margin-top: 20px;
     }
 
-    .tag {
-      border: 1px solid var(--line);
-      border-radius: 3px;
-      padding: 3px 8px;
-      font-size: 11px;
-      color: #444;
-    }
-
-    .details { padding: 0 24px 24px; }
-
-    .details summary {
-      color: var(--red);
-      cursor: pointer;
-      font-size: 13px;
-      font-weight: 750;
-    }
-
-    .details p {
-      font-size: 14px;
-      color: var(--muted);
-    }
-
-    .details h4 {
-      margin-bottom: 0;
-      font-size: 14px;
-    }
-
-    .skills-grid { gap: 16px; }
-
-    .skill {
-      padding: 20px;
-      border: 1px solid var(--line);
+    .tag-list li {
+      padding: 5px 11px;
+      border: 1px solid #e6c4c4;
+      background: #fff8f8;
       border-radius: 5px;
+      color: #7d2727;
+      font-size: 0.77rem;
+      font-weight: 700;
     }
 
-    .skill p {
-      font-size: 14px;
+    .project-body {
+      padding: 35px 38px 40px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-bottom: 38px;
+    }
+
+    .gallery figure {
+      min-width: 0;
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .gallery figure.featured {
+      grid-column: span 2;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 290px;
+      object-fit: contain;
+      background: #f1f1f1;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery figure.featured img {
+      height: 410px;
+    }
+
+    .gallery figure:hover img {
+      transform: scale(1.015);
+    }
+
+    .gallery figcaption {
+      padding: 15px 17px 17px;
+      background: white;
+    }
+
+    .gallery figcaption strong {
+      display: block;
+      font-size: 0.94rem;
+      margin-bottom: 5px;
+    }
+
+    .gallery figcaption span {
+      display: block;
       color: var(--muted);
-      margin-bottom: 0;
+      font-size: 0.86rem;
+      line-height: 1.6;
     }
 
-    .timeline {
-      border-left: 2px solid #ead0d2;
-      margin-left: 7px;
+    .project-details {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 30px 42px;
     }
 
-    .job {
-      padding: 0 0 26px 25px;
-      position: relative;
+    .detail h4 {
+      font-size: 1.02rem;
+      margin-bottom: 10px;
     }
 
-    .job::before {
+    .detail h4::before {
       content: "";
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      left: -6px;
-      top: 9px;
-      border-radius: 50%;
+      display: inline-block;
+      width: 7px;
+      height: 7px;
       background: var(--red);
+      border-radius: 50%;
+      margin: 0 9px 2px 0;
     }
 
-    .job p {
+    .detail p,
+    .detail li {
       color: var(--muted);
-      font-size: 14px;
-      max-width: 750px;
+      font-size: 0.93rem;
     }
 
-    .role {
-      color: var(--red);
-      font-size: 13px;
-      font-weight: 650;
+    .detail ul {
+      padding-left: 19px;
     }
+
+    .detail li {
+      padding: 3px 0;
+    }
+
+    .project-outcome {
+      margin-top: 32px;
+      padding: 22px 24px;
+      background: var(--red-light);
+      border-left: 4px solid var(--red);
+      border-radius: 0 6px 6px 0;
+    }
+
+    .project-outcome strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .project-outcome p {
+      color: #5e4545;
+      font-size: 0.92rem;
+    }
+
+    /* Skills */
+
+    .skills {
+      background: var(--surface);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .skill-card {
+      padding: 27px;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+    }
+
+    .skill-card .skill-index {
+      display: inline-block;
+      color: var(--red);
+      font-size: 0.78rem;
+      font-weight: 850;
+      margin-bottom: 15px;
+    }
+
+    .skill-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 11px;
+    }
+
+    .skill-card p {
+      color: var(--muted);
+      font-size: 0.91rem;
+    }
+
+    /* Experience */
+
+    .experience-list {
+      border-top: 1px solid var(--line);
+    }
+
+    .experience-item {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 45px;
+      padding: 31px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .experience-type {
+      color: var(--red);
+      font-size: 0.76rem;
+      font-weight: 850;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 7px;
+    }
+
+    .experience-date {
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    .experience-content h3 {
+      font-size: 1.25rem;
+      margin-bottom: 5px;
+    }
+
+    .experience-content h4 {
+      font-size: 0.94rem;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0;
+      margin-bottom: 14px;
+    }
+
+    .experience-content ul {
+      padding-left: 19px;
+    }
+
+    .experience-content li {
+      color: #595959;
+      font-size: 0.93rem;
+      padding: 3px 0;
+    }
+
+    /* Education */
+
+    .education-card {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 30px;
+      align-items: start;
+      padding: 32px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+    }
+
+    .education-card h3 {
+      font-size: 1.45rem;
+      margin-bottom: 7px;
+    }
+
+    .education-card p {
+      color: var(--muted);
+      margin-bottom: 5px;
+    }
+
+    .education-date {
+      color: var(--red);
+      font-weight: 750;
+      white-space: nowrap;
+    }
+
+    /* Contact */
 
     .contact {
-      background: var(--soft);
-      padding: 38px;
-      border: 1px solid var(--line);
-      border-radius: 7px;
+      background: #171717;
+      color: white;
     }
 
-    .contact p { color: var(--muted); }
+    .contact .eyebrow {
+      color: #ff8585;
+    }
 
-    .contact-links { margin-top:
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 0.75fr;
+      gap: 75px;
+      align-items: start;
+    }
+
+    .contact h2 {
+      max-width: 620px;
+    }
+
+    .contact-copy {
+      max-width: 560px;
+      color: #c8c8c8;
+      margin: 18px 0 28px;
+    }
+
+    .contact .button-primary {
+      background: var(--red);
+      border-color: var(--red);
+    }
+
+    .contact-info {
+      border-top: 1px solid #444;
+    }
+
+    .contact-row {
+      padding: 19px 0;
+      border-bottom: 1px solid #444;
+    }
+
+    .contact-row span {
+      display: block;
+      color: #a8a8a8;
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    .contact-row a {
+      overflow-wrap: anywhere;
+      font-size: 0.96rem;
+    }
+
+    .contact-row a:hover {
+      color: #ff8585;
+    }
+
+    footer {
+      padding: 22px 0;
+      background: #111;
+      color: #a8a8a8;
+      font-size: 0.82rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    /* Responsive */
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .about-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .hero-panel {
+        max-width: 600px;
+      }
+
+      .skills-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .experience-item {
+        grid-template-columns: 165px 1fr;
+        gap: 25px;
+      }
+
+      .nav-links {
+        gap: 15px;
+      }
+
+      .nav-links a {
+        font-size: 0.8rem;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .container {
+        width: min(100% - 32px, var(--max-width));
+      }
+
+      section {
+        padding: 72px 0;
+      }
+
+      .nav-inner {
+        min-height: auto;
+        padding: 16px 0 12px;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 13px;
+      }
+
+      .nav-links {
+        width: 100%;
+        gap: 18px;
+        overflow-x: auto;
+        padding-bottom: 4px;
+      }
+
+      .nav-links a {
+        white-space: nowrap;
+      }
+
+      .nav-contact {
+        padding: 5px 9px;
+      }
+
+      .hero {
+        padding: 72px 0;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.8rem, 13vw, 4.2rem);
+      }
+
+      .hero-description {
+        font-size: 1rem;
+      }
+
+      .hero-panel {
+        padding: 24px;
+      }
+
+      .principles,
+      .skills-grid,
+      .project-details,
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery figure.featured {
+        grid-column: span 1;
+      }
+
+      .gallery img,
+      .gallery figure.featured img {
+        height: auto;
+        max-height: 370px;
+        min-height: 220px;
+        object-fit: contain;
+      }
+
+      .project-header,
+      .project-body {
+        padding: 24px 19px;
+      }
+
+      .experience-item {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .education-card {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 24px;
+      }
+
+      .education-date {
+        white-space: normal;
+      }
+
+      .contact-grid {
+        gap: 35px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *, *::before, *::after {
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <header class="navbar">
+    <nav class="container nav-inner" aria-label="Main navigation">
+      <a class="brand" href="#home">JESSE<span>.</span></a>
+
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a class="nav-contact" href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+
+        <div>
+          <p class="eyebrow">Engineering · Embedded Systems · Design</p>
+
+          <h1>
+            Turning ideas into
+            <span>working systems.</span>
+          </h1>
+
+          <p class="hero-description">
+            I'm Jesse Stephen, an engineering student interested in the
+            intersection of hardware, software, and physical design.
+            I enjoy taking a problem from an initial concept to a working
+            prototype through experimentation, fabrication, and iteration.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button button-primary" href="#projects">
+              Explore my projects <span aria-hidden="true">↘</span>
+            </a>
+
+            <a class="button button-secondary" href="#contact">
+              Get in touch
+            </a>
+          </div>
+        </div>
+
+        <aside class="hero-panel">
+          <p class="hero-panel-label">Areas of focus</p>
+
+          <div class="focus-item">
+            <strong>Embedded Systems</strong>
+            <p>Microcontrollers, motor control, wiring, and hardware integration.</p>
+          </div>
+
+          <div class="focus-item">
+            <strong>Prototyping & Fabrication</strong>
+            <p>CAD modeling, 3D printing, laser cutting, and iterative design.</p>
+          </div>
+
+          <div class="focus-item">
+            <strong>Assistive Technology</strong>
+            <p>Exploring practical engineering solutions to real-world problems.</p>
+          </div>
+        </aside>
+
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about" id="about">
+      <div class="container about-grid">
+
+        <div>
+          <p class="eyebrow">01 / About</p>
+          <h2>Curiosity is the starting point.</h2>
+          <div class="accent-line"></div>
+        </div>
+
+        <div class="about-copy">
+          <p>
+            I approach engineering as a process of asking questions, building
+            something tangible, testing assumptions, and improving the result.
+            I am particularly interested in projects where electrical,
+            mechanical, and software systems have to work together.
+          </p>
+
+          <p>
+            My project experience includes developing a joystick-controlled
+            attachment for a manual wheelchair and contributing to the design
+            of an articulated, 3D-printed action figure with a motorized base.
+            Both projects gave me opportunities to work through practical
+            challenges that are not always obvious on paper.
+          </p>
+
+          <p>
+            Alongside project work, my technical support experience has
+            strengthened my troubleshooting, communication, and ability to
+            diagnose problems systematically. I value solutions that are
+            functional, understandable, and designed with their limitations
+            in mind.
+          </p>
+
+          <div class="principles">
+            <div class="principle">
+              <strong>Build</strong>
+              <span>Turn concepts into physical prototypes.</span>
+            </div>
+
+            <div class="principle">
+              <strong>Test</strong>
+              <span>Use evidence to understand performance.</span>
+            </div>
+
+            <div class="principle">
+              <strong>Improve</strong>
+              <span>Iterate when a design falls short.</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="container">
+
+        <div class="section-heading">
+          <p class="eyebrow">02 / Selected work</p>
+          <h2>Projects & case studies</h2>
+          <p class="section-intro">
+            A closer look at how I approach design, fabrication,
+            programming, testing, and engineering tradeoffs.
+          </p>
+          <div class="accent-line"></div>
+        </div>
+
+        <!-- PROJECT 1: WHEELCHAIR -->
+        <article class="project">
+
+          <header class="project-header">
+            <span class="project-number">PROJECT 01</span>
+
+            <h3>Joystick-Controlled Wheelchair Attachment</h3>
+
+            <p class="project-summary">
+              A low-cost powered-assistance prototype designed to explore
+              how a joystick, microcontroller, and motor system could
+              provide directional movement for a manual wheelchair.
+              The project combined mechanical mounting, electronics,
+              embedded programming, and hands-on testing.
+            </p>
+
+            <ul class="tag-list" aria-label="Technologies used">
+              <li>Arduino</li>
+              <li>C++</li>
+              <li>DC Motors</li>
+              <li>Motor Driver</li>
+              <li>Joystick Input</li>
+              <li>3D Printing</li>
+              <li>Laser Cutting</li>
+            </ul>
+          </header>
+
+          <div class="project-body">
+
+            <div class="gallery">
+
+              <figure class="featured">
+                <img
+                  src="images/wheelchair-no-load-test.jpg"
+                  alt="Wheelchair attachment prototype during a no-load test, with the battery positioned on the seat"
+                  loading="lazy"
+                >
+                <figcaption>
+                  <strong>Integrated prototype and no-load testing</strong>
+                  <span>
+                    The assembled system brought the mounting structure,
+                    motors, battery, wiring, and wheelchair together for
+                    initial testing without a rider.
+                  </span>
+                </figcaption>
+              </figure>
+
+              <figure>
+                <img
+                  src="images/wheelchair-torque-test-1.jpg"
+                  alt="Close-up of the wheelchair drive mechanism during torque and wheel-contact testing"
+                  loading="lazy"
+                >
+                <figcaption>
+                  <strong>Drive mechanism testing</strong>
+                  <span>
+                    Examining the contact between the drive mechanism
+                    and the wheelchair wheel to understand traction
+                    and torque transfer.
+                  </span>
+                </figcaption>
+              </figure>
+
+              <figure>
+                <img
+                  src="images/wheelchair-torque-test-2.jpg"
+                  alt="Second close-up showing the wheelchair attachment's motor and wheel-contact setup"
+                  loading="lazy"
+                >
+                <figcaption>
+                  <strong>Identifying mechanical limitations</strong>
+                  <span>
+                    Testing exposed wheel slippage and limitations in
+                    transferring motor torque effectively to the tire.
+                  </span>
+                </figcaption>
+              </figure>
+
+              <figure class="featured">
+                <img
+                  src="images/wheelchair-laser-cutting.jpg"
+                  alt="Laser cutter fabricating the wooden mounting board for the wheelchair attachment"
+                  loading="lazy"
+                >
+                <figcaption>
+                  <strong>Fabricating the mounting structure</strong>
+                  <span>
+                    Laser-cut wood provided a custom mounting platform.
+                    3D-printed components were used for motor mounts and
+                    shaft or wheel connections.
+                  </span>
+                </figcaption>
+              </figure>
+
+            </div>
+
+            <div class="project-details">
+
+              <div class="detail">
+                <h4>The problem</h4>
+                <p>
+                  Manual wheelchairs require physical effort to move.
+                  This project explored a compact, budget-conscious
+                  powered-assistance concept using commonly available
+                  electronics and fabricated parts.
+                </p>
+              </div>
+
+              <div class="detail">
+                <h4>My engineering approach</h4>
+                <ul>
+                  <li>Integrated joystick input with an Arduino-based control system.</li>
+                  <li>Used a motor driver to control DC motor direction.</li>
+                  <li>Fabricated a wooden mounting board using a laser cutter.</li>
+                  <li>Designed and used 3D-printed motor mounts and connectors.</li>
+                  <li>Integrated wiring and a battery into the prototype.</li>
+                </ul>
+              </div>
+
+              <div class="detail">
+                <h4>Control logic</h4>
+                <p>
+                  The joystick supplied directional input. The Arduino
+                  interpreted that input and controlled motor direction,
+                  allowing the prototype to explore forward, backward,
+                  and turning commands. The system was programmed in
+                  the Arduino C++ environment.
+                </p>
+              </div>
+
+              <div class="detail">
+                <h4>Testing & iteration</h4>
+                <p>
+                  Initial tests revealed that the small drive wheel could
+                  slip instead of consistently transferring torque.
+                  I adjusted its position relative to the handrim and
+                  wheelchair tire to improve contact and friction.
+                  This highlighted the importance of mechanical alignment
+                  in addition to electrical and software design.
+                </p>
+              </div>
+
+              <div class="detail">
+                <h4>Materials & components</h4>
+                <ul>
+                  <li>Arduino microcontroller and joystick</li>
+                  <li>Motor driver and DC motors</li>
+                  <li>Battery and electrical wiring</li>
+                  <li>Laser-cut wooden mounting board</li>
+                  <li>3D-printed motor mounts and connectors</li>
+                </ul>
+              </div>
+
+              <div class="detail">
+                <h4>Budget-conscious design</h4>
+                <p>
+                  The prototype was developed for approximately $50,
+                  excluding a battery that was already available.
+                  Using fabricated mounting parts and accessible
+                  electronics helped keep the material cost low.
+                </p>
+              </div>
+
+            </div>
+
+            <div class="project-outcome">
+              <strong>Outcome & lessons learned</strong>
+              <p>
+                The prototype demonstrated initial motorized movement
+                and provided practical experience with embedded control,
+                mechanical integration, and troubleshooting. Wheel
+                slippage remained a limitation, and testing was conducted
+                without a rider. The prototype was not validated for
+                rider use or real-world safety.
+              </p>
+            </div>
+
+          </div>
+        </article>
+
+        <!-- PROJECT 2: ACTION FIGURE -->
+        <article class="project">
+
+          <header class="project-header">
+            <span class="project-number">PROJECT 02</span>
+
+            <h3>Interactive 3D-Printed Action Figure</h3>
+
+            <p class="project-summary">
+              A poseable action figure developed through CAD modeling,
+              iterative 3D printing, and mechanical refinement, paired
+              with a motorized rotating base and LED indicator. The project
+              combined physical product design with a simple electronic
+              interaction.
+            </p>
+
+            <ul class="tag-list" aria-label="Technologies used">
+              <li>Onshape CAD</li>
+              <li>3D Printing</li>
+              <li>PLA</li>
+              <li>Mechanical Design</li>
+              <li>Microcontroller Programming</li>
+              <li>LED</li>
+              <li>DC Motor</li>
+            </ul>
+          </header>
+
+          <div class="project-body">
+
+            <div class="gallery">
+
+              <figure class="featured">
+                <img
+                  src="images/action-figure-assembled.jpg"
+                  alt="Completed articulated 3D-printed action figure"
+                  loading="lazy"
+                >
+                <figcaption>
+                  <strong>Assembled action figure</strong>
+                  <span>
+                    The assembled figure brings together the printed body,
+                    limbs, and articulated joints into a single poseable design.
+                  </span>
+                </figcaption>
+              </figure>
+
+              <figure>
+                <img
+                  src="images/action-figure-prototype.jpg"
+                  alt="Disassembled 3D-printed action figure components laid out for assembly"
+                  loading="lazy"
+                >
+                <figcaption>
+                  <strong>Component design and assembly</strong>
+                  <span>
+                    Individual printed components were designed to fit
+                    together while allowing the figure's joints to move.
+                  </span>
+                </figcaption>
+              </figure>
+
+              <figure>
+                <img
+                  src="images/action-figure-motorized-base.jpg"
+                  alt="3D-printed action figure displayed on its motorized base with a blue LED illuminated"
+                  loading="lazy"
+                >
+                <figcaption>
+                  <strong>Motorized display base</strong>
+                  <span>
+                    The rotating base adds movement to the display, while
+                    a button, LED, and two AAA batteries support the
+                    interactive electronics.
+                  </span>
+                </figcaption>
+              </figure>
+
+            </div>
+
+            <div class="project-details">
+
+              <div class="detail">
+                <h4>The design challenge</h4>
+                <p>
+                  The figure needed to be poseable while remaining
+                  structurally connected. Its printed parts needed
+                  enough clearance to move without becoming too loose
+                  or difficult to assemble.
+                </p>
+              </div>
+
+              <div class="detail">
+                <h4>My contributions</h4>
+                <ul>
+                  <li>Modeled components using Onshape CAD.</li>
+                  <li>Contributed to mechanical design and prototype refinement.</li>
+                  <li>Wrote the code for the motorized base.</li>
+                  <li>Helped document the project and prepare the report.</li>
+                </ul>
+                <p style="margin-top: 10px;">
+                  These are my individual contributions within a collaborative
+                  team project.
+                </p>
+              </div>
+
+              <div class="detail">
+                <h4>CAD & fabrication</h4>
+                <p>
+                  The components were modeled in Onshape and fabricated
+                  through 3D printing using PLA. Multiple prototypes
+                  allowed the team to evaluate fit, joint movement,
+                  proportions, and overall assembly.
+                </p>
+              </div>
+
+              <div class="detail">
+                <h4>Iterative refinement</h4>
+                <p>
+                  Prototype revisions addressed joint clearances,
+                  the leg connection, body proportions, and the feet
+                  and base interface. These changes helped improve
+                  assembly and the physical stability of the design.
+                </p>
+              </div>
+
+              <div class="detail">
+                <h4>Motorized base</h4>
+                <p>
+                  The display base incorporated a motor for rotation,
+                  a button, an LED indicator, and two AAA batteries.
+                  I programmed the base's electronic behavior, connecting
+                  the physical controls and components through code.
+                </p>
+              </div>
+
+              <div class="detail">
+                <h4>Skills applied</h4>
+                <ul>
+                  <li>Parametric CAD modeling</li>
+                  <li>Design for assembly and joint fit</li>
+                  <li>3D printing and prototyping</li>
+                  <li>Basic motor and LED control</li>
+                  <li>Technical documentation and teamwork</li>
+                </ul>
+              </div>
+
+            </div>
+
+            <div class="project-outcome">
+              <strong>Outcome & lessons learned</strong>
+              <p>
+                The project combined an articulated printed object with
+                a motorized display system. It reinforced the value of
+                prototyping, dimensional adjustments, mechanical fit,
+                and coordinating physical hardware with software.
+              </p>
+            </div>
+
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="skills" id="skills">
+      <div class="container">
+
+        <div class="section-heading">
+          <p class="eyebrow">03 / Capabilities</p>
+          <h2>Technical toolkit</h2>
+          <p class="section-intro">
+            Tools and technical areas developed through coursework,
+            personal projects, fabrication, and technical support.
+          </p>
+          <div class="accent-line"></div>
+        </div>
+
+        <div class="skills-grid">
+
+          <article class="skill-card">
+            <span class="skill-index">01</span>
+            <h3>Programming</h3>
+            <p>
+              C++, Java, Python, MATLAB, Arduino programming,
+              and control logic for hardware prototypes.
+            </p>
+          </article>
+
+          <article class="skill-card">
+            <span class="skill-index">02</span>
+            <h3>Embedded Systems</h3>
+            <p>
+              Microcontrollers, DC motor control, motor drivers,
+              joystick input, wiring, and hardware integration.
+            </p>
+          </article>
+
+          <article class="skill-card">
+            <span class="skill-index">03</span>
+            <h3>CAD & Fabrication</h3>
+            <p>
+              Onshape, 3D printing, laser cutting, mechanical
+              components, and iterative physical prototyping.
+            </p>
+          </article>
+
+          <article class="skill-card">
+            <span class="skill-index">04</span>
+            <h3>Hardware Troubleshooting</h3>
+            <p>
+              Systematic diagnosis, hardware and software checks,
+              component testing, and technical problem solving.
+            </p>
+          </article>
+
+          <article class="skill-card">
+            <span class="skill-index">05</span>
+            <h3>Technical Support</h3>
+            <p>
+              User support, troubleshooting, issue documentation,
+              software assistance, and clear communication.
+            </p>
+          </article>
+
+          <article class="skill-card">
+            <span class="skill-index">06</span>
+            <h3>Engineering Process</h3>
+            <p>
+              Problem definition, prototyping, test observations,
+              design iteration, technical writing, and collaboration.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <div class="container">
+
+        <div class="section-heading">
+          <p class="eyebrow">04 / Experience</p>
+          <h2>Where I've applied my skills</h2>
+          <p class="section-intro">
+            Technical support and operations experience that complements
+            my engineering projects.
+          </p>
+          <div class="accent-line"></div>
+        </div>
+
+        <div class="experience-list">
+
+          <article class="experience-item">
+            <div>
+              <p class="experience-type">Technical Support</p>
+              <p class="experience-date">Rutgers University</p>
+            </div>
+
+            <div class="experience-content">
+              <h3>Student IT Consultant / Computer Lab Assistant</h3>
+              <h4>Office of Information Technology</h4>
+
+              <ul>
+                <li>
+                  Diagnose and resolve software, printing, and
+                  computer-related issues in university environments.
+                </li>
+                <li>
+                  Analyze user-reported technical problems and apply
+                  troubleshooting techniques to identify potential causes.
+                </li>
+                <li>
+                  Assist students and university users with technical
+                  questions and software resources.
+                </li>
+                <li>
+                  Document technical issues and communicate relevant
+                  information to support resolution.
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="experience-item">
+            <div>
+              <p class="experience-type">IT & Operations</p>
+              <p class="experience-date">Ocean Park Indoor Playground</p>
+            </div>
+
+            <div class="experience-content">
+              <h3>IT & Operations Support</h3>
+              <h4>Technical systems and operational support</h4>
+
+              <ul>
+                <li>
+                  Provided technical support for operational hardware
+                  and software systems.
+                </li>
+                <li>
+                  Troubleshot equipment and software issues to support
+                  day-to-day operations.
+                </li>
+                <li>
+                  Assisted with software updates, system checks, and
+                  equipment-related problem solving.
+                </li>
+                <li>
+                  Communicated technical issues and coordinated with
+                  other team members to support resolution.
+                </li>
+              </ul>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education">
+      <div class="container">
+
+        <div class="section-heading">
+          <p class="eyebrow">05 / Education</p>
+          <h2>Academic foundation</h2>
+          <div class="accent-line"></div>
+        </div>
+
+        <article class="education-card">
+          <div>
+            <h3>Rutgers University–New Brunswick</h3>
+            <p>Electrical and Computer Engineering</p>
+            <p>Engineering coursework and hands-on technical projects.</p>
+          </div>
+
+          <p class="education-date">Expected May 2029</p>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+      <div class="container contact-grid">
+
+        <div>
+          <p class="eyebrow">06 / Contact</p>
+          <h2>Let's build something meaningful.</h2>
+
+          <p class="contact-copy">
+            I'm interested in opportunities to apply my engineering,
+            prototyping, programming, and troubleshooting skills.
+            If you'd like to discuss a project or professional opportunity,
+            feel free to reach out.
+          </p>
+
+          <a class="button button-primary"
+             href="mailto:jstephen0318@gmail.com">
+            Email me <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+
+        <div class="contact-info">
+          <div class="contact-row">
+            <span>Email</span>
+            <a href="mailto:jstephen0318@gmail.com">
+              jstephen0318@gmail.com
+            </a>
+          </div>
+
+          <div class="contact-row">
+            <span>University email</span>
+            <a href="mailto:js3937@scarletmail.rutgers.edu">
+              js3937@scarletmail.rutgers.edu
+            </a>
+          </div>
+
+          <div class="contact-row">
+            <span>GitHub</span>
+            <a href="https://github.com/Jessestephen1"
+               target="_blank"
+               rel="noopener noreferrer">
+              github.com/Jessestephen1 ↗
+            </a>
+          </div>
+
+          <div class="contact-row">
+            <span>Portfolio repository</span>
+            <a href="https://github.com/Jessestephen1/Jessestephen1.github.io"
+               target="_blank"
+               rel="noopener noreferrer">
+              View source code ↗
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-inner">
+      <p>© <span id="year">2026</span> Jesse Stephen</p>
+      <p>Designed with purpose. Built through iteration.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Keep the copyright year current.
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+    // If a photo path is incorrect, show a clear fallback instead
+    // of leaving a broken-image icon.
+    document.querySelectorAll(".gallery img").forEach(function (img) {
+      img.addEventListener("error", function () {
+        const figure = img.closest("figure");
+
+        img.style.display = "none";
+
+        const fallback = document.createElement("div");
+        fallback.style.padding = "35px 20px";
+        fallback.style.textAlign = "center";
+        fallback.style.color = "#656565";
+        fallback.style.background = "#f7f7f7";
+        fallback.textContent =
+          "Photo not found. Check the filename in the images folder.";
+
+        img.insertAdjacentElement("afterend", fallback);
+        img.dataset.fallbackShown = "true";
+      }, { once: true });
+    });
+  </script>
+
+</body>
+</html>
